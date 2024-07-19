@@ -7,9 +7,13 @@ export default function ThemedButton(props) {
     return props.children;
   };
 
-  const buttonStyles = props.isPrimary
+  let buttonStyles = props.isPrimary
     ? { ...styles.pressableStyles, ...styles.primary }
     : { ...styles.pressableStyles, ...styles.secondary };
+
+  buttonStyles = props.icon
+    ? { ...buttonStyles, ...styles.withButtonStyles }
+    : buttonStyles;
 
   const textStyles = props.isPrimary
     ? styles.primaryText
@@ -31,6 +35,8 @@ const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     borderRadius: "50%",
+  },
+  withButtonStyles: {
     flexDirection: "row",
     alignItems: "center",
     gap: 10,

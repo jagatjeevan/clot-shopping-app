@@ -4,23 +4,28 @@ import { Text, StyleSheet, View } from "react-native";
 import { fonts } from "../styles/theme";
 import ThemedInput from "../common/ThemedInput";
 import ThemedButton from "../common/ThemedButton";
+import withAuth from "../context/authContext";
 
-export default function EnterEmail(props) {
+function EnterEmail(props) {
+  const { updateSigninViaEmail, authContext } = props;
+  const { dispatch } = authContext;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmailFilled, setIsEmailFilled] = useState(false);
 
   const resetState = () => {
     setIsEmailFilled(false);
-    props.updateSigninViaEmail(false);
+    updateSigninViaEmail(false);
   };
 
   const handleContinue = () => {
     if (!isEmailFilled) {
       setIsEmailFilled(true);
-      props.updateSigninViaEmail(true);
+      updateSigninViaEmail(true);
+      return;
     }
-    console.log("i received the email and password", email, password);
+    const user = { email, password };
+    dispatch.login(user);
   };
 
   return (
@@ -29,11 +34,13 @@ export default function EnterEmail(props) {
         <ThemedInput
           placeholder="Email Address"
           onChangeText={setEmail}
+          autoCorrect={false}
           value={email}
         />
       ) : (
         <ThemedInput
           placeholder="Password"
+          secureTextEntry={true}
           onChangeText={setPassword}
           value={password}
         />
@@ -68,3 +75,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default withAuth(EnterEmail);

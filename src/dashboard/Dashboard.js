@@ -1,7 +1,19 @@
-export default function Dashboard() {
+import { StyleSheet, Text, View } from "react-native";
+
+import withAuth from "../context/authContext";
+
+function Dashboard(props) {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>{props.authContext.state.user.email} is logged in.</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+
+export default withAuth(Dashboard);

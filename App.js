@@ -1,19 +1,17 @@
 import { StatusBar } from "expo-status-bar";
-import { useState } from "react";
 import { StyleSheet, SafeAreaView } from "react-native";
 
-import Dashboard from "./src/dashboard/Dashboard";
-import Login from "./src/login/Login";
+import Home from "./src/index";
+import { Provider as AuthProvider } from "./src/context/authContext";
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(null);
-
   return (
-    <SafeAreaView style={styles.container}>
-      {isLoggedIn ? <Dashboard /> : <Login />}
-
-      <StatusBar style="auto" />
-    </SafeAreaView>
+    <AuthProvider>
+      <SafeAreaView style={styles.container}>
+        <Home />
+        <StatusBar style="auto" />
+      </SafeAreaView>
+    </AuthProvider>
   );
 }
 
