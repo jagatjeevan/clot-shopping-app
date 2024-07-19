@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 
 export default function ThemedButton(props) {
   const getIcon = () => {
@@ -18,6 +18,7 @@ export default function ThemedButton(props) {
   return (
     <Pressable style={buttonStyles} onPress={props.onPressed}>
       {getIcon()}
+
       <Text style={textStyles}>{props.title}</Text>
     </Pressable>
   );
@@ -30,6 +31,9 @@ const styles = StyleSheet.create({
     width: "100%",
     textAlign: "center",
     borderRadius: "50%",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
   },
   primary: {
     backgroundColor: "#8E6CEF",

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet } from "react-native";
+import { Text, StyleSheet, View } from "react-native";
 
 import { fonts } from "../styles/theme";
 import ThemedInput from "../common/ThemedInput";
@@ -9,6 +9,11 @@ export default function EnterEmail(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isEmailFilled, setIsEmailFilled] = useState(false);
+
+  const resetState = () => {
+    setIsEmailFilled(false);
+    props.updateSigninViaEmail(false);
+  };
 
   const handleContinue = () => {
     if (!isEmailFilled) {
@@ -38,6 +43,14 @@ export default function EnterEmail(props) {
         title="Continue"
         isPrimary={true}
       />
+      {isEmailFilled && (
+        <View style={styles.additionalLinks}>
+          <Text>Forgot Password ?</Text>
+          <Text style={styles.resetLink} onPress={resetState}>
+            Reset
+          </Text>
+        </View>
+      )}
     </>
   );
 }
@@ -45,5 +58,13 @@ export default function EnterEmail(props) {
 const styles = StyleSheet.create({
   heading: {
     ...fonts.heading1,
+  },
+  additionalLinks: {
+    flexDirection: "row",
+    marginTop: 10,
+  },
+  resetLink: {
+    marginLeft: 5,
+    fontWeight: "bold",
   },
 });

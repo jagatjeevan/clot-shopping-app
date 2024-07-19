@@ -14,21 +14,21 @@ export default function LoginViaOther() {
         title="Continue with Apple"
         icon={true}
       >
-        <Image src={{ uri: "asset:/login/apple.svg" }} width={15} height={15} />
+        <Image source={require("../../assets/login/apple.png")} />
       </ThemedButton>
       <ThemedButton
         onPressed={() => onPressHandler("google")}
         title="Continue with Google"
         icon={true}
       >
-        <Image src="../../assets/login/google.svg" width={15} height={15} />
+        <Image source={require("../../assets/login/google.png")} />
       </ThemedButton>
       <ThemedButton
         onPressed={() => onPressHandler("facebook")}
         title="Continue with Facebook"
         icon={true}
       >
-        <Image src="../../assets/login/facebook.svg" width={15} height={15} />
+        <Image source={require("../../assets/login/facebook.png")} />
       </ThemedButton>
     </>
   );
